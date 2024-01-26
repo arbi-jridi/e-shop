@@ -1,0 +1,47 @@
+<nav class="navbar  bg-light border-bottom border-body" data-bs-theme="bg-primary ">
+   
+       
+          <a class="navbar-brand" routerLink="/">
+            <img   src="/assets/logo.png"   class="bi me-2 rounded-circle" width="50" height="50" routerLink="/" [routerLinkActive]="['active']" >
+          </a>
+     
+     
+<ul class="nav nav-tabs navflex">
+   
+  <li class="nav-item nav-item2">
+    <a class="nav-link" aria-current="page" routerLink="/shopping-cart" [routerLinkActive]="['active']">shopping cart</a>
+  </li> 
+  <ng-template #anonymousUser>
+    <li class="nav-item" >
+      <a class="nav-link" aria-current="page" routerLink="/login" [routerLinkActive]="['active']">Login</a>
+    </li>  
+  </ng-template>
+
+
+  <form class="d-flex " role="search">
+    <input class="form-control me-2" type="search" placeholder="Search Product 🛒" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+  <div class="drop" >
+   
+  <li class="nav-item dropdown " >
+    <a class="nav-link dropdown-toggle drop" data-bs-toggle="dropdown" role="button" aria-expanded="true" *ngIf="user$ |async as user;else anonymousUser" >{{(user.displayName) ? user.displayName : 'User'}}</a>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" routerLink="/my-orders" >my-orders</a></li>
+      <li><a class="dropdown-item" routerLink="/admin/orders">manage Orders</a></li>
+      <li><a class="dropdown-item" routerLink="/admin/products" >manage Products</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item" (click)="authService.logout()">logout</a></li>
+    </ul>
+  </li>
+  <img  *ngIf="user$ |async as user"class="bi me-2 rounded-circle" width="45" height="45" src="{{user.photoURL}}" alt="{{user.displayName}}">
+</div>
+</ul>
+
+
+
+  </nav>
+  
+
+
+   

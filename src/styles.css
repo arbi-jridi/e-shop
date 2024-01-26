@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+.nav {
+    --bs-nav-link-padding-x: 40px !important; 
+   
+}
+
+
+@media (max-width: 710px) {
+    .navbar {
+        padding: 10px !important;
+        justify-content: center !important;
+        justify-self: center !important;
+    }
+
+    .drop {
+        display: flexbox !important;
+       text-align: center !important;
+        justify-content: center !important;
+        justify-self: center !important;
+    }
+
+
+}
+
+
+
