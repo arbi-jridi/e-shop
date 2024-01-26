@@ -5,9 +5,7 @@
 /tmp
 /out-tsc
 /bazel-out
-public/
 public /
-/public
 /public 
 
 # Node
