@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import {redirectUnauthorizedTo} from '@angular/fire/auth-guard';
+
 
 import { ManageProductsComponent } from './manage-products/manage-products.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
@@ -14,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(["login"]);
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -23,12 +26,12 @@ const routes: Routes = [
 
 // admin routes
 
-  { path: 'admin/products', component: AdminProductsComponent,canActivate:[AuthGuardService] },
-  { path: 'admin/orders', component: AdminOrdersComponent ,canActivate:[AuthGuardService]},
+  { path: 'admin/products', component: AdminProductsComponent,canActivate:[AuthGuardService],data: { authGuardPipe: redirectUnauthorizedToLogin } },
+  { path: 'admin/orders', component: AdminOrdersComponent ,canActivate:[AuthGuardService],data: { authGuardPipe: redirectUnauthorizedToLogin }},
   
-  { path: 'check-out', component: CheckOutComponent,canActivate:[AuthGuardService] },
-  { path: 'order-success', component: OrderSuccessComponent,canActivate:[AuthGuardService] },
-  { path: 'my-orders', component: MyOrdersComponent,canActivate:[AuthGuardService] },
+  { path: 'check-out', component: CheckOutComponent,canActivate:[AuthGuardService],data: { authGuardPipe: redirectUnauthorizedToLogin } },
+  { path: 'order-success', component: OrderSuccessComponent,canActivate:[AuthGuardService],data: { authGuardPipe: redirectUnauthorizedToLogin } },
+  { path: 'my-orders', component: MyOrdersComponent,canActivate:[AuthGuardService] ,data: { authGuardPipe: redirectUnauthorizedToLogin }},
   { path: 'no-access', component:NoAccessComponent},
   { path: '**', redirectTo: '' }
 ];
