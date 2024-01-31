@@ -1,3 +1,4 @@
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
@@ -12,7 +13,8 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import * as auth from 'firebase/auth';
-import { User } from './user';
+import { AppUser, User } from '../models/user';
+import { AngularFireDatabase,AngularFireObject } from '@angular/fire/compat/database';
 
 
 @Injectable({
@@ -24,7 +26,7 @@ export class AuthService {
 
 
 
-  constructor(public afAuth: AngularFireAuth,public router : Router ,public afs: AngularFirestore,) {
+  constructor(public afAuth: AngularFireAuth,public router : Router ,public afs: AngularFirestore,public db:AngularFireDatabase) {
      /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
@@ -43,10 +45,21 @@ export class AuthService {
 
   }
   
+// SAVE USER TO REALTIME DATABSE
 
+saveUser(user:firebase.User) {
+this.db.object('/users/'+ user.uid).update({
+    user:user.displayName,
+    email:user.email
+})
+}
+
+getUser(uid:string):AngularFireObject<AppUser>{
+  return this.db.object('/users/' + uid)
+}
 
   
-
+// SAVE USER TO FIRESTORE DATABSE
   SetUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
@@ -67,15 +80,16 @@ export class AuthService {
 
 // Sign in with Google this work
 GoogleAuth() {
-  return this.AuthLogin(new auth.GoogleAuthProvider()).then(res=>{
-    let returnUrl = localStorage.getItem('returnUrl')
+  return this.AuthLogin(new auth.GoogleAuthProvider()).then((res:any)=>{
+    let returnUrl = localStorage.getItem('returnUrl');
     this.router.navigateByUrl(returnUrl?? '/');
-    
+    this.saveUser(res.user);
+    this.SetUserData(user);
   });
 }
 
 googleSignIn() {
-  return this.afAuth.signInWithPopup(new GoogleAuthProvider).then(res => {
+  return this.afAuth.signInWithPopup(new GoogleAuthProvider).then((res:any) => {
     localStorage.setItem('token',JSON.stringify(res.user));
   }, err => {
     alert(err.message);

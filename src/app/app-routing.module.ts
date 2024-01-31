@@ -15,6 +15,7 @@ import { OrderSuccessComponent } from './order-success/order-success.component';
 import { LoginComponent } from './login/login.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
+import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(["login"]);
 
@@ -26,8 +27,8 @@ const routes: Routes = [
 
 // admin routes
 
-  { path: 'admin/products', component: AdminProductsComponent,canActivate:[AuthGuardService],data: { authGuardPipe: redirectUnauthorizedToLogin } },
-  { path: 'admin/orders', component: AdminOrdersComponent ,canActivate:[AuthGuardService],data: { authGuardPipe: redirectUnauthorizedToLogin }},
+  { path: 'admin/products', component: AdminProductsComponent,canActivate:[AuthGuardService,AdminAuthGuardService],data: { authGuardPipe: redirectUnauthorizedToLogin } },
+  { path: 'admin/orders', component: AdminOrdersComponent ,canActivate:[AuthGuardService,AdminAuthGuardService],data: { authGuardPipe: redirectUnauthorizedToLogin }},
   
   { path: 'check-out', component: CheckOutComponent,canActivate:[AuthGuardService],data: { authGuardPipe: redirectUnauthorizedToLogin } },
   { path: 'order-success', component: OrderSuccessComponent,canActivate:[AuthGuardService],data: { authGuardPipe: redirectUnauthorizedToLogin } },

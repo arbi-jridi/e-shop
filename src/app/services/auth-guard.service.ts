@@ -1,8 +1,6 @@
 import { Auth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-
-
 import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
