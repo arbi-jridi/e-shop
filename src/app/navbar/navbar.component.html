@@ -27,9 +27,12 @@
   <li class="nav-item dropdown " >
     <a class="nav-link dropdown-toggle drop" data-bs-toggle="dropdown" role="button" aria-expanded="true" *ngIf="user$ |async as user;else anonymousUser" >{{(user.displayName) ? user.displayName : 'User'}}</a>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" routerLink="/my-orders" >my-orders</a></li>
-      <li><a class="dropdown-item" routerLink="/admin/orders">manage Orders</a></li>
-      <li><a class="dropdown-item" routerLink="/admin/products" >manage Products</a></li>
+      <li><a class="dropdown-item" routerLink="/my-orders"  >my-orders</a></li>
+      <ng-template *ngIf="isadmin$ |async" >
+        <li><a class="dropdown-item" routerLink="/admin/orders">manage Orders</a></li>
+        <li><a class="dropdown-item" routerLink="/admin/products" >manage Products</a></li>
+      </ng-template>
+
       <li><hr class="dropdown-divider"></li>
       <li><a class="dropdown-item" (click)="authService.logout()">logout</a></li>
     </ul>

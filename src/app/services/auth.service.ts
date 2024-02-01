@@ -1,6 +1,9 @@
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map, switchMap ,filter,tap} from 'rxjs/operators';
+
+
 
 import { Injectable } from '@angular/core';
 import { Auth ,signInWithPopup, user, } from '@angular/fire/auth';
@@ -57,6 +60,16 @@ this.db.object('/users/'+ user.uid).update({
 getUser(uid:string):AngularFireObject<AppUser>{
   return this.db.object('/users/' + uid)
 }
+
+//didn't work nevermind
+/* get AppUser$(): Observable<AppUser> {
+  return this.theUser$.pipe(
+    switchMap(user => this.getUser(user.uid).valueChanges()),
+    map(user => ({...user, isAdmin: user?.isAdmin ?? false})), // Default isAdmin to false if undefined
+    tap(user => console.log(user)), // Add this line to log the user object
+    filter((user): user is AppUser => user !== null)
+  );
+} */
 
   
 // SAVE USER TO FIRESTORE DATABSE
