@@ -1,9 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
-.nav {
+/* .nav {
     --bs-nav-link-padding-x: 40px !important; 
    
-}
+} */
 
 
 @media (max-width: 710px) {
@@ -22,6 +22,47 @@
 
 
 }
+/* 
+#carouselExampleInterval {
+    overflow: hidden !important;  
+    backface-visibility: hidden !important;
+}
 
 
+.carousel-item  {
+    overflow: hidden !important;
+    backface-visibility: hidden !important;
+    float: (100% - 5px) !important;
+    max-width:100% !important;
+}
 
+.carousel-inner {
+    overflow: hidden !important;
+    backface-visibility: hidden !important;
+}
+
+
+.carousel slide {
+    overflow: hidden !important;
+    backface-visibility: hidden !important;
+}
+
+.countainer {
+    overflow: hidden !important;
+    backface-visibility: hidden !important;
+}
+
+.top_products {
+    overflow: hidden !important;
+    backface-visibility: hidden !important;
+}
+
+section {
+    overflow: hidden !important;
+    backface-visibility: hidden !important;
+}
+
+_ngcontent-ng-c707581183 {
+    overflow: hidden !important;
+    backface-visibility: hidden !important;
+} */

@@ -1,50 +1,47 @@
-<nav class="navbar  bg-light border-bottom border-body" data-bs-theme="bg-primary ">
+
+  <div class="drop">
+  <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-warning rounded-5 shadow-sm" id="pillNav2" role="tablist" style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
    
-       
-          <a class="navbar-brand" routerLink="/">
-            <img   src="/assets/logo.png"   class="bi me-2 rounded-circle" width="50" height="50" routerLink="/" [routerLinkActive]="['active']" >
-          </a>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active rounded-5" id="home-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" routerLink="/" [routerLinkActive]="['active']"> <a class="navbar-brand" routerLink="/">
+        <img   src="/assets/logo.png"  class="bi me-2 rounded-circle" width="35" height="35"  >
+      </a>ESHOP</button>
      
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active rounded-5" id="home-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" routerLink="/shopping-cart" [routerLinkActive]="['active']"> <a class="navbar-brand" >
+        <img   src="/assets/kart.png"   class="bi me-2 rounded-circle" width="35" height="35"  >
+      </a>shopping Cart</button>
      
-<ul class="nav nav-tabs navflex">
-   
-  <li class="nav-item nav-item2">
-    <a class="nav-link" aria-current="page" routerLink="/shopping-cart" [routerLinkActive]="['active']">shopping cart</a>
-  </li> 
-  <ng-template #anonymousUser>
-    <li class="nav-item" >
-      <a class="nav-link" aria-current="page" routerLink="/login" [routerLinkActive]="['active']">Login</a>
-    </li>  
-  </ng-template>
+    </li>
 
-
-  <form class="d-flex " role="search">
-    <input class="form-control me-2" type="search" placeholder="Search Product 🛒" aria-label="Search">
-    <button class="btn btn-outline-success" type="submit">Search</button>
-  </form>
-  <div class="drop" >
-   
-  <li class="nav-item dropdown " >
-    <a class="nav-link dropdown-toggle drop" data-bs-toggle="dropdown" role="button" aria-expanded="true" *ngIf="user$ |async as user;else anonymousUser" >{{(user.displayName) ? user.displayName : 'User'}}</a>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" routerLink="/my-orders"  >my-orders</a></li>
-      <ng-template *ngIf="isadmin$ |async" >
-        <li><a class="dropdown-item" routerLink="/admin/orders">manage Orders</a></li>
-        <li><a class="dropdown-item" routerLink="/admin/products" >manage Products</a></li>
-      </ng-template>
-
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" (click)="authService.logout()">logout</a></li>
-    </ul>
-  </li>
-  <img  *ngIf="user$ |async as user"class="bi me-2 rounded-circle" width="45" height="45" src="{{user.photoURL}}" alt="{{user.displayName}}">
-</div>
-</ul>
-
-
-
-  </nav>
+    <ng-template #anonymousUser>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active rounded-5" id="home-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" routerLink="/login" [routerLinkActive]="['active']"> <a class="navbar-brand" >
+          <img   src="/assets/login.png"   class="bi me-2 rounded-circle" width="35" height="35"  >
+        </a>Login</button>
+      </li>
+    </ng-template>
   
+    <li class="nav-item dropdown" role="presentation">
+      
+      <a class="nav-link dropdown-toggle drop" data-bs-toggle="dropdown" role="button" aria-expanded="true" *ngIf="user$ |async as user;else anonymousUser" >{{(user.displayName) ? user.displayName : 'User'}}</a>
+      
+      <ul class="dropdown-menu">
+        <li role="presentation"><a class="dropdown-item" routerLink="/my-orders">my-orders</a></li>
+          <li *ngIf="isadmin$ |async"><a class="dropdown-item" role="presentation" routerLink="/admin/orders">manage Orders</a></li>
+          <li *ngIf="isadmin$ |async"><a class="dropdown-item" role="presentation" routerLink="/admin/products" >manage Products</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" role="presentation" (click)="authService.logout()">logout</a></li>
+      </ul>
+      
+    </li>
 
+    
+        <img  *ngIf="user$ |async as user"class="bi me-2 rounded-circle" width="40" height="40" src="{{user.photoURL}}" alt="{{user.displayName}}">
+   
+
+  </ul>
+</div>
 
    

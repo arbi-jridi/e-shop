@@ -1,5 +1,8 @@
 
 
 .drop {
-    display: flex;
+    display: flexbox;
+    justify-content: space-around !important;
+    
+    justify-items: center;
 }

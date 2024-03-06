@@ -1,0 +1,5 @@
+.row{
+    margin: 30px;
+    display: flex;
+    flex-direction: rows;
+    }

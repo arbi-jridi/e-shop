@@ -10,6 +10,13 @@ import { AngularFireAuthModule} from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+
+
+
+
 
 
 
@@ -18,6 +25,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 
+
+
 import { ManageProductsComponent } from './manage-products/manage-products.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NoAccessComponent } from './no-access/no-access.component';
@@ -25,20 +34,23 @@ import { CheckOutComponent } from './check-out/check-out.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
+import { ProductsFormComponent } from './admin/products-form/products-form.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { AdminAuthGuardService } from './services/admin-auth-guard.service';
+import { CategoriesService } from './services/categories.service';
+import { ProductService } from './services/product.service';
 
-
+ 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MyOrdersComponent,
-   
+    ProductsFormComponent,
     ManageProductsComponent,
     NavbarComponent,
     NoAccessComponent,
@@ -47,7 +59,9 @@ import { AdminAuthGuardService } from './services/admin-auth-guard.service';
     ShoppingCartComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    LoginComponent
+    
+    LoginComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -61,12 +75,16 @@ import { AdminAuthGuardService } from './services/admin-auth-guard.service';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    
+    FormsModule,
+    CommonModule
+   
   ],
   providers: [
     AuthService,
     AuthGuardService,
-    AdminAuthGuardService
+    AdminAuthGuardService,
+    CategoriesService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })

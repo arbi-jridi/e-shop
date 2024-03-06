@@ -1,0 +1,80 @@
+
+<div class="row">
+    <div class="col-md-6">
+  
+<form (ngSubmit)="save(f.value)" #f="ngForm">
+    <div class="form-group">
+        <label for="id">Id</label>
+        <input [(ngModel)]="product.id"  name="id" type="number" class="form-control" id="id" required #id="ngModel">
+        
+        <div class="alert alert-danger" *ngIf="id.touched && id.invalid">The id is required !</div>
+    </div>
+
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input [(ngModel)]="product.title"   name="title" type="text" class="form-control" id="title" required #title="ngModel">
+        
+        <div class="alert alert-danger" *ngIf="title.touched && title.invalid">Title is required !</div>
+    </div>
+
+    <div class="form-group">
+        <label for="price">Price</label>
+        <div class="input-group">
+            <input type="number" class="form-control" id="price"  [(ngModel)]="product.price" #price="ngModel" name="price" required min="0">
+            <span  class="input-group-text">$</span>
+        </div>
+        <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
+            <div *ngIf="price.errors?.['required']">"price is required !"</div>
+            <div *ngIf="price.errors?.['pattern']">price must be a number</div>
+            <div *ngIf="price.errors?.['min']">price must be =>0 ! </div>
+            </div>
+    </div> 
+
+     <div class="form-group">
+        <label for="category">Category</label>
+        <select  class="form-control" id="category" [(ngModel)]="product.category" name="category" #category="ngModel" required>
+            <option value=""></option>
+            <option *ngFor="let category of categories$ " [value]="category.name">{{category.name}}</option>
+            </select>
+            <div class="alert alert-danger" *ngIf="category.touched && category.invalid">category is required!</div>
+        </div>
+
+            <div class="form-group">
+                <label for="imageUrl">Image Url</label>
+                <div class="input-group">
+                <span  class="input-group-text">http://</span>
+                <input type="text" class="form-control" id="imageUrl" #imageUrl="ngModel" [(ngModel)]="product.imageUrl" name="imageUrl" required pattern="https?://.+">
+            </div> 
+        </div>   
+            <div class="alert alert-danger" *ngIf="imageUrl.touched && imageUrl.invalid">
+            <div  *ngIf="imageUrl.errors?.['required']">image Url is Required!</div>
+            <div *ngIf="imageUrl.errors?.['pattern']">image Url is invalid! must  start with http:// or https://...</div>
+        </div>
+            <br>
+<button class="btn btn-primary"  type="submit">Save</button>
+    
+</form>
+
+</div>
+
+<div class="col-md-6">
+    <div class="card" style="width: 20rem;">
+        <img [src]="imageUrl.value" class="card-img-top">
+        <hr>
+        <div class="card-body">
+          <h5 class="card-title" style="color: dodgerblue;" >{{title.value}}</h5>
+          <p class="card-text">{{price.value | currency:'USD':true}}</p>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+    <div class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+           Product Added succefully
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
