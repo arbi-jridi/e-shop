@@ -16,6 +16,7 @@
             "outputPath": "public/",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "allowedCommonJsDependencies": ["jquery"],
             "polyfills": [
               "zone.js"
             ],
@@ -25,9 +26,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/datatables.net-dt/css/dataTables.dataTables.min.css",
+              "node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/datatables.net/js/dataTables.js",
+              "node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -87,12 +95,23 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/datatables.net-dt/css/dataTables.dataTables.min.css",
+              "node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/datatables.net/js/dataTables.js",
+              "node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           }
         }
       }
     }
   }
 }
+
+
+
+

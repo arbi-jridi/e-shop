@@ -66,3 +66,23 @@ _ngcontent-ng-c707581183 {
     overflow: hidden !important;
     backface-visibility: hidden !important;
 } */
+
+.dt-search {
+    padding: 30px !important;
+    margin-right: 30px !important;
+}
+
+.dt-length {
+    padding: 30px !important;
+    margin-left: 30px !important;
+}
+
+.dt-paging {
+padding: 30px !important;
+margin-left: 30px !important;
+}
+
+.dt-info {
+    padding: 30px !important;
+    margin-left: 30px !important;
+    }

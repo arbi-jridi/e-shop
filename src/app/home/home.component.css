@@ -2150,7 +2150,7 @@ body.open .cart{
 }
 .to_top:hover{
     color: #faf5e6ef;
-    background-color: #EEBF00;
+    
     transform: rotate(360deg);
 
 }

@@ -24,7 +24,9 @@ window.addEventListener('resize', () => {
 
   }
 
-constructor(private elementRef: ElementRef,private renderer: Renderer2){}
+constructor(private elementRef: ElementRef,private renderer: Renderer2){
+  console.log(this.windowHeight)
+}
 
 
 

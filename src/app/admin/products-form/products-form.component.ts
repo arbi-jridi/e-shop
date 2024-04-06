@@ -24,6 +24,7 @@ export class ProductsFormComponent {
   categories$:any;
   products:any
   product$:any;
+  isExisting= false;
 
   private destroy$ = new Subject<void>();
 
@@ -35,10 +36,6 @@ export class ProductsFormComponent {
     imageUrl:''
   };
 
-
-
-
- 
 
   constructor( categories: CategoriesService,private ProductService :ProductService, private router: Router,private db:AngularFireDatabase, private afs:AngularFirestore ,private route:ActivatedRoute,private cdr: ChangeDetectorRef,) 
   {  
@@ -64,42 +61,51 @@ export class ProductsFormComponent {
       },
     );
 
-
-  
-
-
-
-
-
     }
-
+ 
 
     ngOnInit() {
+      this.isExisting = false;
       const id = this.route.snapshot.paramMap.get('id');
       if (id) {
-        console.log(id);
-      
         this.ProductService.getProductWithKey(id).pipe(takeUntil(this.destroy$))
           .subscribe(productData => {
+            this.isExisting = true;
             const productId = +id; 
             this.product = productData.find(product => product.id === productId);
-      
-            console.log(this.product);
           });
       }
 
-
-
     }
 
+    async save(product:any){
+      if(this.isExisting)
+      {
+        const id = this.route.snapshot.paramMap.get('id');
+        this.ProductService.update(id, product); 
+        await new Promise(resolve => setTimeout(resolve, 1000)); 
+        await this.router.navigate(['/admin/products']);
+      }
+      else{
+        this.ProductService.createProductWithId(product);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        await this.router.navigate(['/admin/products']);
+      }
+    }  
 
 
+    deleteProduct(){
+      const confirmDelete = confirm('Are you sure you want to delete this product?');
+      if (confirmDelete) {
+        const id = this.route.snapshot.paramMap.get('id');
+        this.ProductService.delete(id);
+      }
+      
+   
+    }
+   
 
-  save(product:any){
-    this.ProductService.create(product);
-    this.router.navigate(['/admin/products']);
-    console.log(product);
-  }
+  
 
   ngOnDestroy() {
     this.destroy$.next();

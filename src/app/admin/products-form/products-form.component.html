@@ -2,8 +2,8 @@
 <div class="row">
     <div class="col-md-6">
   
-<form (ngSubmit)="save(f.value)" #f="ngForm">
-    <div class="form-group">
+<form  (ngSubmit)="save(f.value)"    #f="ngForm">
+    <div class="form-group" *ngIf="!isExisting">
         <label for="id">Id</label>
         <input [(ngModel)]="product.id"  name="id" type="number" class="form-control" id="id" required #id="ngModel">
         
@@ -52,7 +52,9 @@
         </div>
             <br>
 <button class="btn btn-primary"  type="submit">Save</button>
-    
+&nbsp;
+<button type="button" class="btn btn-danger" (click)="deleteProduct()">Delete</button>
+
 </form>
 
 </div>
@@ -68,13 +70,8 @@
       </div>
     </div>
 
+
+
 </div>
 
-    <div class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-          <div class="toast-body">
-           Product Added succefully
-          </div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-      </div>
+

@@ -12,6 +12,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { DataTablesModule } from "angular-datatables";
 
 
 
@@ -76,7 +77,8 @@ import { ProductService } from './services/product.service';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    DataTablesModule
    
   ],
   providers: [

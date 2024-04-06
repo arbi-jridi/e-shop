@@ -3,15 +3,12 @@
 <br>
 <div style="display: flex;  justify-content: space-evenly ; justify-items: center;">
 <button type="button" class="btn btn-info" routerLink="/admin/products/new">New Product</button>
-<form class="d-flex " role="search">
-  <input class="form-control me-2" type="search" placeholder="Search Product 🛒" aria-label="Search">
-  <button class="btn btn-outline-success" type="submit">Search</button>
-</form>
+
 
 </div>
 <br>
-<table class="table table-striped table-hover" style="margin:  auto; width: 98%; text-align:center;" >
-	<thead class="table-primary">
+<table  datatable [dtOptions]="dtOptions" id="table" class="table table-striped table-hover row-border hover" style="margin:  auto; width: 98%; text-align:center;" *ngIf="products.length" >
+	<thead class="table-warning" id="table">
 		<tr>
       <th scope="col">id</th>
 			<th scope="col">Product</th>
@@ -20,28 +17,24 @@
 
 		</tr>
 	</thead>
-  <tbody table-group-divider>
-    <tr *ngFor="let product of products$">
+  <tbody table-group-divider id="table">
+    <tr *ngFor="let product of filtredProducts">
       <td>{{product.id}}</td>
       <td>{{product.title}}</td>
       <td>${{product.price}}</td>
       
-      <td><a [routerLink]="['/admin/products/', product.id]" class="btn btn-warning">Edit</a></td>
+      <td>
+        <a [routerLink]="['/admin/products/', product.id]" class="btn btn-warning">Edit</a>
+       
+        
+      </td>
     </tr>
   </tbody>
 
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-      <li class="page-item disabled">
-        <a class="page-link">Previous</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
-      </li>
-    </ul>
-  </nav>
 </table>
+
+
+
+
+
 
