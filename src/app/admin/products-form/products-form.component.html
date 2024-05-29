@@ -53,14 +53,14 @@
             <br>
 <button class="btn btn-primary"  type="submit">Save</button>
 &nbsp;
-<button type="button" class="btn btn-danger" (click)="deleteProduct()">Delete</button>
+<button type="button" class="btn btn-danger" (click)="deleteProduct()" *ngIf="isExisting">Delete Product</button>
 
 </form>
 
 </div>
 
 <div class="col-md-6">
-    <div class="card" style="width: 20rem;">
+    <div class="card" style="width: 20rem;" *ngIf="product.title">
         <img [src]="imageUrl.value" class="card-img-top">
         <hr>
         <div class="card-body">

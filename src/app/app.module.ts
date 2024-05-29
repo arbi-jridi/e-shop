@@ -1,3 +1,5 @@
+
+import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,7 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
-
+import { ProductFilterComponent } from './catalog/product-filter/product-filter.component';
 
 
 import { ManageProductsComponent } from './manage-products/manage-products.component';
@@ -34,6 +36,7 @@ import { NoAccessComponent } from './no-access/no-access.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { OrderSuccessComponent } from './order-success/order-success.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { CatalogComponent } from './catalog/catalog.component';
 import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
 import { ProductsFormComponent } from './admin/products-form/products-form.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
@@ -43,6 +46,8 @@ import { AuthService } from './services/auth.service';
 import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 import { CategoriesService } from './services/categories.service';
 import { ProductService } from './services/product.service';
+import { ShoppingCartService } from './services/shopping-cart.service';
+
 
  
 
@@ -60,18 +65,17 @@ import { ProductService } from './services/product.service';
     ShoppingCartComponent,
     AdminProductsComponent,
     AdminOrdersComponent,
-    
+    CatalogComponent,
     LoginComponent,
-    
+    ProductFilterComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     RouterModule,
-  
     AngularFireModule.initializeApp(environment.firebaseConfig), 
-    
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
@@ -86,7 +90,8 @@ import { ProductService } from './services/product.service';
     AuthGuardService,
     AdminAuthGuardService,
     CategoriesService,
-    ProductService
+    ProductService,
+    ShoppingCartService
   ],
   bootstrap: [AppComponent]
 })

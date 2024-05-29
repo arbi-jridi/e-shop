@@ -18,6 +18,7 @@ import 'firebase/compat/firestore';
 import * as auth from 'firebase/auth';
 import { AppUser, User } from '../models/user';
 import { AngularFireDatabase,AngularFireObject } from '@angular/fire/compat/database';
+import { HttpClient } from '@angular/common/http';
 
 
 @Injectable({
@@ -29,7 +30,7 @@ export class AuthService {
 
 
 
-  constructor(public afAuth: AngularFireAuth,public router : Router ,public afs: AngularFirestore,public db:AngularFireDatabase) {
+  constructor(public afAuth: AngularFireAuth,public router : Router ,public afs: AngularFirestore,public db:AngularFireDatabase ,public http: HttpClient) {
      /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
@@ -96,10 +97,30 @@ GoogleAuth() {
   return this.AuthLogin(new auth.GoogleAuthProvider()).then((res:any)=>{
     let returnUrl = localStorage.getItem('returnUrl');
     this.router.navigateByUrl(returnUrl?? '/');
+    location.reload();
     this.saveUser(res.user);
     this.SetUserData(user);
   });
 }
+
+
+signInWithFacebook(){
+  return this.AuthLogin(new auth.FacebookAuthProvider()).then((res:any)=>{
+    let returnUrl = localStorage.getItem('returnUrl');
+    this.router.navigateByUrl(returnUrl?? '/');
+    location.reload();
+    this.saveUser(res.user);
+    this.SetUserData(user);
+  });
+}
+
+/* getProfilePicture(userId: string, accessToken: string) {
+  const url = `https://graph.facebook.com/${userId}/picture?type=large&redirect=false&access_token=${accessToken}`;
+  return this.http.get(url);
+} */
+
+
+
 
 googleSignIn() {
   return this.afAuth.signInWithPopup(new GoogleAuthProvider).then((res:any) => {
@@ -135,7 +156,9 @@ AuthLogin(provider: any) {
     this.afAuth.signOut().then( () => {
       localStorage.removeItem('token');
       localStorage.removeItem('logged');
+      localStorage.removeItem('returnUrl');
       this.router.navigate(['/login']);
+      location.reload();
     }, err => {
       alert(err.message);
     })

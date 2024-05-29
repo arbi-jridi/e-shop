@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AuthGuardService } from './services/auth-guard.service';
-import {redirectUnauthorizedTo} from '@angular/fire/auth-guard';
+import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
+import {redirectUnauthorizedTo,redirectLoggedInTo} from '@angular/fire/auth-guard';
 
 
 import { ManageProductsComponent } from './manage-products/manage-products.component';
@@ -17,22 +18,27 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { AdminAuthGuardService } from './services/admin-auth-guard.service';
 import { ProductsFormComponent } from './admin/products-form/products-form.component';
+import { CatalogComponent } from './catalog/catalog.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(["login"]);
+const redirectUnauthorizedToHome = () => redirectUnauthorizedTo(["/"]);
+const redirectLoggedInToHome = () => redirectLoggedInTo(["/"]);
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'shopping-cart', component: ShoppingCartComponent },
+  { path: 'catalog/category:id', component: CatalogComponent },
+  { path: 'catalog', component: CatalogComponent },
   { path: 'manage-products', component: ManageProductsComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent,canActivate: [AngularFireAuthGuard], data: { authGuardPipe: redirectLoggedInToHome }},
 
 // admin routes
 
   
-  { path: 'admin/orders', component: AdminOrdersComponent ,canActivate:[AuthGuardService,AdminAuthGuardService],data: { authGuardPipe: redirectUnauthorizedToLogin }},
-  { path: 'admin/products/new', component: ProductsFormComponent },
-  { path: 'admin/products/:id', component: ProductsFormComponent },
-  { path: 'admin/products', component: AdminProductsComponent/* ,canActivate:[AuthGuardService,AdminAuthGuardService],data: { authGuardPipe: redirectUnauthorizedToLogin } */ },
+  { path: 'admin/orders', component: AdminOrdersComponent ,canActivate:[AuthGuardService,AdminAuthGuardService,AngularFireAuthGuard],data: { authGuardPipe: redirectUnauthorizedToHome }},
+  { path: 'admin/products/new', component: ProductsFormComponent,canActivate:[AuthGuardService,AdminAuthGuardService,AngularFireAuthGuard],data: { authGuardPipe: redirectUnauthorizedToHome } },
+  { path: 'admin/products/:id', component: ProductsFormComponent ,canActivate:[AuthGuardService,AdminAuthGuardService,AngularFireAuthGuard],data: { authGuardPipe: redirectUnauthorizedToHome }},
+  { path: 'admin/products', component: AdminProductsComponent ,canActivate:[AuthGuardService,AdminAuthGuardService,AngularFireAuthGuard],data: { authGuardPipe: redirectUnauthorizedToHome }  },
   { path: 'check-out', component: CheckOutComponent,canActivate:[AuthGuardService],data: { authGuardPipe: redirectUnauthorizedToLogin } },
   { path: 'order-success', component: OrderSuccessComponent,canActivate:[AuthGuardService],data: { authGuardPipe: redirectUnauthorizedToLogin } },
   { path: 'my-orders', component: MyOrdersComponent,canActivate:[AuthGuardService] ,data: { authGuardPipe: redirectUnauthorizedToLogin }},

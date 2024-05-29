@@ -1,0 +1,9 @@
+
+<div class="list-group fixed-list sticky-top" style="padding:5px;">
+    <a class="list-group-item list-group-item-action"  style="padding:5px;"
+     routerLink="/catalog" aria-selected="false" aria-checked="false" aria-current="false" [class.active]="!category">All Categories</a>
+    <a *ngFor="let category of categories$" 
+    class="list-group-item list-group-item-action" aria-current="false" style="padding:10px;" 
+    routerLink="/catalog" [queryParams]="{category:category.name}" 
+    [routerLinkActive]="['active']" >{{category.name}}</a>
+</div>

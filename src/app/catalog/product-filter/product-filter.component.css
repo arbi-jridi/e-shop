@@ -1,0 +1,56 @@
+
+.sticky-top {
+  top: 130px;
+   } 
+
+
+@media screen and (max-width: 524px) {
+    .fixed-list {
+      position: fixed;
+      width: 35vw;
+      overflow-x: auto; 
+    }
+    .sticky-top {
+      top: 123px !important;
+       } 
+
+.list-group-item-action {
+  width: 35% row !important;
+}
+
+  }
+
+  @media screen and (max-width: 476px) {
+    .sticky-top {
+      top: 152px !important;
+       } 
+
+  }
+
+  @media screen and (max-width: 370px) {
+
+
+    .sticky-top {
+        top: 178px !important;
+        padding: 10px !important;
+         } }
+
+
+  @media screen and (max-width: 314px) {
+    .sticky-top {
+      top: 211px !important;
+       } 
+
+  /*      .list-group{
+        padding: 0px;
+       }
+
+       list-group-item{
+        padding: 0px;
+       } */
+
+
+  }
+
+
+

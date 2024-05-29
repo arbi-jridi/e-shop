@@ -13,11 +13,23 @@ padding-top: 5%;
 }
 
 .btn-google {
-  color: white !important;
-  background-color: #ea4335;
+  color: red !important;
+  background-color: white;
+  border: 1px solid red !important;
 }
 
 .btn-facebook {
+  color: #1877F2 !important;
+  background-color: white !important;
+  border: 1px solid #1877F2 !important;
+}
+
+.btn-facebook:hover {
+  background-color: #1877F2 !important;
   color: white !important;
-  background-color: #3b5998;
+}
+
+.btn-google:hover {
+  background-color: red !important;
+  color: white !important;
 }

@@ -24,6 +24,9 @@ export class LoginComponent {
     this.AuthService.GoogleAuth()
   }
 
+  signInWithFacebook(){
+    this.AuthService.signInWithFacebook()
+  }
 
 
 }

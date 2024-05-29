@@ -15,7 +15,7 @@ export class CategoriesService {
   }
 
 
-  get Categories(){
+  getAll(){
     return this.db.list('/categories')
   }
   

@@ -1,24 +1,24 @@
 
-  <div class="drop">
-  <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-warning rounded-5 shadow-sm" id="pillNav2" role="tablist" style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
+  <div class="drop sticky-top ">
+  <ul class="nav nav-pills nav-fill gap-2 p-1 small bg-warning rounded-5 shadow-sm " id="pillNav2" role="tablist" style="--bs-nav-link-color: var(--bs-white); --bs-nav-pills-link-active-color: var(--bs-primary); --bs-nav-pills-link-active-bg: var(--bs-white);">
    
     <li class="nav-item" role="presentation">
-      <button class="nav-link active rounded-5" id="home-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" routerLink="/" [routerLinkActive]="['active']"> <a class="navbar-brand" routerLink="/">
-        <img   src="/assets/logo.png"  class="bi me-2 rounded-circle" width="35" height="35"  >
+      <button class="nav-link  rounded-5" id="home-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" routerLink="/" [routerLinkActive]="['active']"> <a class="navbar-brand" routerLink="/">
+        <img   src="assets/logo.png"  class="bi me-2 rounded-circle" width="35" height="35"  >
       </a>ESHOP</button>
      
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link active rounded-5" id="home-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" routerLink="/shopping-cart" [routerLinkActive]="['active']"> <a class="navbar-brand" >
-        <img   src="/assets/kart.png"   class="bi me-2 rounded-circle" width="35" height="35"  >
-      </a>shopping Cart</button>
+      <button class="nav-link  rounded-5" id="home-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" routerLink="/catalog" [routerLinkActive]="['active']"> <a class="navbar-brand" >
+        <img   src="assets/kart.png"   class="bi me-2 rounded-circle" width="35" height="35"  >
+      </a>Products Catalog</button>
      
     </li>
 
     <ng-template #anonymousUser>
       <li class="nav-item" role="presentation">
-        <button class="nav-link active rounded-5" id="home-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="true" routerLink="/login" [routerLinkActive]="['active']"> <a class="navbar-brand" >
-          <img   src="/assets/login.png"   class="bi me-2 rounded-circle" width="35" height="35"  >
+        <button class="nav-link  rounded-5" id="home-tab2" data-bs-toggle="tab" type="button" role="tab" aria-selected="false" routerLink="/login" [routerLinkActive]="['active']"> <a class="navbar-brand" >
+          <img   src="assets/login.png"   class="bi me-2 rounded-circle" width="35" height="35"  >
         </a>Login</button>
       </li>
     </ng-template>

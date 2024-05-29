@@ -1,0 +1,64 @@
+
+
+<br/>
+
+<div class="row">
+ 
+                <div class="col-3">
+                    <div class="sticky-top fixed-list">
+                        <button class="btn" type="button" style=" margin: 10px; padding-right:10px ;" (click)="toggle()" title="categories">
+                            <img src="assets/menu.webp" alt="" style="width: 40px;">
+                           </button>
+                        <span class="badge bg-primary " [hidden]="!isToggled">{{filteredProducts.length}}</span>
+                    </div>
+                <product-filter [category]="category" [hidden]="!isToggled"></product-filter>
+                </div>
+            
+    <div class="col">
+        <div class="row">
+            <br/>
+            <ng-container *ngFor="let product of filteredProducts;let i=index" style="padding:20px;margin:20px;justify-content: center; justify-items: center;">
+                <div class="col" style="padding:10px;margin:10px;">
+                <div class="container" >       
+                    <div class="profile-wrapper">
+                        <div class="profile">
+                            <div class="profile-image">
+                                <img class="card-img-top"
+                                [src]="product.imageUrl"
+                                    alt="product" 
+                                >
+                            </div>
+                            <hr>
+                            <ul class="social-icons">
+                                <li>
+                              
+                                    <a  title="Add to Cart">
+                                        <img   src="assets/kart.png"   class="bi me-2 rounded-circle" width="40" height="40" (click)="addToCart(product)"  >
+                                      
+                                    </a>
+                                    
+                                </li>
+                                
+                            </ul>
+                            <hr>
+                            <hr>
+                            <div style="background: gainsboro;">
+                            <div class="profile-name"  >
+                                <h2 style="color: dodgerblue;">{{product.title}}</h2>
+                                <div class="profile-bio">
+                                    {{product.price | currency:'USD':true}}
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="(i+1)%3===0" class="w-100"></div>
+            </ng-container>
+            </div>
+    </div>
+    
+</div>
+
+        <br>  <br/>
