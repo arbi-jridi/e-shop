@@ -38,8 +38,7 @@
                                     </a>
                                     
                                 </li>
-                                
-                            </ul>
+                                                          </ul>
                             <hr>
                             <hr>
                             <div style="background: gainsboro;">
@@ -48,6 +47,8 @@
                                 <div class="profile-bio">
                                     {{product.price | currency:'USD':true}}
                                 </div>
+                                <hr *ngIf="productQuantities[product.id!]>0">
+                                <h4 style="color: dodgerblue;" *ngIf="productQuantities[product.id!]>0"><i class="fa fa-shopping-cart" style="font-size:25px;"></i>:{{ productQuantities[product.id!] }}</h4>   
                             </div>
                         </div>
                         </div>

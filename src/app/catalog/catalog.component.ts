@@ -1,3 +1,4 @@
+import { product } from './../models/product';
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
@@ -20,6 +21,8 @@ export class CatalogComponent implements OnInit, OnDestroy {
   isToggled:boolean = false;
   products: Product[] = [];
   filteredProducts: Product[] = [];
+  productQuantities: { [productId: string]: number } = {};
+
   
   category!:string|null ;
   subscription: Subscription = new Subscription();
@@ -37,6 +40,10 @@ loadProducts(){
   this.subscription.add(
     this.ProductService.getAll().valueChanges().pipe(
       map((products: any[]) => products as Product[]),
+      tap(products => {
+        this.products = products;
+        products.forEach(product => this.getQuantity(product));
+      }),
       switchMap(products=>{this.products=products;
         console.log(this.products);
         return this.route.queryParamMap;
@@ -60,11 +67,18 @@ if (this.isToggled) {
 }
 
 addToCart(product:Product){
-  this.cartService.addToCart(product);
+  this.cartService.addToCart(product).then(()=>{this.getQuantity(product)})
 }
 
 
-
+async getQuantity(product: Product) {
+  if (product.id !== undefined) {
+    const quantity = await this.cartService.getQuantity(product);
+    if (typeof quantity === 'number') {
+      this.productQuantities[product.id] = quantity;
+    } 
+  }
+}
 
 
 

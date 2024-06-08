@@ -35,6 +35,10 @@ private getCart(cartId:string){
   return this.afs.collection('/shopping-carts'+cartId)
 }
 
+private getItem(cartId:string,productId:string){
+  return this.afs.doc(`/shopping-carts/${cartId}/items/${productId}`);
+}
+
 
  private async getOrCreateCartId()
  {
@@ -52,7 +56,7 @@ return result;
 
 async addToCart(product: Product) {
   let cartId = await this.getOrCreateCartId();
-  let itemRef = this.afs.doc(`/shopping-carts/${cartId}/items/${product.id}`);
+  let itemRef = this.getItem(cartId,product.id!);
 
   itemRef.valueChanges().pipe(take(1)).subscribe((item) => {
     const cartItem = item as CartItem | null; // Type assertion
@@ -63,7 +67,20 @@ async addToCart(product: Product) {
       itemRef.set({ product: product, quantity: 1 });
     }
   });
+
+
 }
+
+async getQuantity(product: Product){
+
+ let cartId = await this.getOrCreateCartId();
+  let itemRef = this.getItem(cartId,product.id!);
+  return itemRef.valueChanges().pipe(take(1)).toPromise().then((item) => {
+    const cartItem = item as CartItem | null; // Type assertion
+    return cartItem ? cartItem.quantity : 0; 
+  });
+}
+
 
 
 }
